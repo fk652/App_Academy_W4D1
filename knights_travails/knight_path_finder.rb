@@ -49,6 +49,16 @@ class KnightPathFinder
     @considered_positions += moves
     moves 
   end
+
+  def find_move(curr_node, end_pos)
+    return curr_node if curr_node.value == end_pos
+
+    curr_node.children.each do |child|
+      search_result = find_move(child, end_pos)
+      return search_result if search_result != nil
+    end
+    nil
+  end
 end
 
 knight = KnightPathFinder.new([0,0])
