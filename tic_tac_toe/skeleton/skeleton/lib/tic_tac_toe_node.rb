@@ -9,14 +9,17 @@ class TicTacToeNode
     @prev_move_pos = prev_move_pos #the last chosen spot on the board, from previous players turn
   end
 
-  def losing_node?(mark) 
-    if mark == @next_mover_mark #its the opponents turn if mark == next movers mark
-      children.any?{|child| child.board.winner != next_mover_mark || child.board.winner == nil}
-    end#its current_players turn 
-
-
-
-    
+  def losing_node?(mark)
+    if mark == @next_mover_mark # self is current player
+      # return false if board.winner == nil
+      if board.winner != nil
+        return false
+      else
+        return children.all? { |child| (child.board.winner != mark) || (!child.board.won) }
+      end
+    else  # self is opponent
+      children.any? { |child| child.board.winner == next_mover_mark }
+    end
   end
 
   def winning_node?(mark)
