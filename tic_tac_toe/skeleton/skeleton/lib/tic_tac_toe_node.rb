@@ -10,6 +10,8 @@ class TicTacToeNode
   end
 
   def losing_node?(mark)
+   return false if board.tied?
+
     if board.over?
       return mark != board.winner
     end
