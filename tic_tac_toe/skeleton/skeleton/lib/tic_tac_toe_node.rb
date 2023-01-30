@@ -11,7 +11,7 @@ class TicTacToeNode
 
   def losing_node?(mark)
     if board.over?
-      return false if mark != board.winner
+      return mark != board.winner
     end
 
     if mark == @next_mover_mark # self is current player
