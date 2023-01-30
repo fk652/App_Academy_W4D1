@@ -13,7 +13,7 @@ class KnightPathFinder
     pos_6 = [(x-1), (y-2)]
     pos_7 = [(x-2), (y+1)]
     pos_8 = [(x-2), (y-1)]
-    possible_moves  = [pos_1, pos_2, pos_3, pos_4, pos_5, pos_6, pos_7, pos_8]
+    possible_moves  = [pos_1, pos_3, pos_8, pos_4, pos_5, pos_2, pos_6, pos_8]
     possible_moves.select { |move| position_in_bounds?(move) }
   end
 
