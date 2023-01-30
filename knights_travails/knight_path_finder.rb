@@ -50,7 +50,7 @@ class KnightPathFinder
     moves 
   end
 
-  def find_move(curr_node, end_pos)
+  def find_move(curr_node, end_pos) #our DFS function
     return curr_node if curr_node.value == end_pos
 
     curr_node.children.each do |child|
@@ -59,13 +59,41 @@ class KnightPathFinder
     end
     nil
   end
+
+  def trace_path_back(end_pos) #this node 
+    path = []
+
+    path << end_pos.value 
+
+    while end_pos.parent != nil
+         end_pos = end_pos.parent 
+         path.unshift(end_pos.value)
+    end
+
+    path
+  end
+
+  def find_path(end_pos) #end_pos reps our target
+    result = find_move(@root_node, end_pos)
+
+    return nil if result == nil 
+    path = trace_path_back(result)
+    
+  end
+
 end
 
 knight = KnightPathFinder.new([0,0])
 knight.root_node.bfs_print
 puts
+puts 
+
 knight = KnightPathFinder.new([2,2])
 knight.root_node.bfs_print
 puts
+
+kpf = KnightPathFinder.new([0, 0])
+p kpf.find_path([7, 6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
+p kpf.find_path([6, 2]) 
 # knight = KnightPathFinder.new([0,10]) # => raises invalid starting position error
 # knight = KnightPathFinder.new([-1,7]) # => raises invalid starting position error
