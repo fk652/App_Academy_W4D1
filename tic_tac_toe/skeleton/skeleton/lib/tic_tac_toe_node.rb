@@ -10,15 +10,15 @@ class TicTacToeNode
   end
 
   def losing_node?(mark)
+    if board.over?
+      return false if mark != board.winner
+    end
+
     if mark == @next_mover_mark # self is current player
-      # return false if board.winner == nil
-      if board.winner != nil
-        return false
-      else
-        return children.all? { |child| (child.board.winner != mark) || (!child.board.won) }
-      end
+      # return false if 
+      children.all? { |child| child.losing_node?(mark) }
     else  # self is opponent
-      children.any? { |child| child.board.winner == next_mover_mark }
+      children.any? { |child| child.losing_node?(mark) }
     end
   end
 
